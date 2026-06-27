@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" role="img" aria-label="Recall — the forgetting curve, flattened">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0b"/>
+      <stop offset="100%" stop-color="#1f1d2b"/>
+    </linearGradient>
+    <linearGradient id="curveA" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+    <linearGradient id="curveB" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="80%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="rgba(16,185,129,0.35)"/>
+      <stop offset="100%" stop-color="rgba(16,185,129,0)"/>
+    </radialGradient>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+
+  <rect width="720" height="480" fill="url(#bg)" rx="24"/>
+  <rect width="720" height="480" fill="url(#glow)" rx="24"/>
+
+  <!-- Forgetting curve (red) — exponential decay -->
+  <path d="M 60 100 C 140 130, 220 220, 320 320 S 600 400, 660 410"
+        stroke="url(#curveA)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.85"/>
+  <path d="M 60 100 C 140 130, 220 220, 320 320 S 600 400, 660 410"
+        stroke="url(#curveA)" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.18" filter="url(#soft)"/>
+
+  <!-- Reinforced curve (green) — flattened with reviews -->
+  <path d="M 60 100 C 160 110, 260 110, 360 130 S 600 150, 660 155"
+        stroke="url(#curveB)" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M 60 100 C 160 110, 260 110, 360 130 S 600 150, 660 155"
+        stroke="url(#curveB)" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.22" filter="url(#soft)"/>
+
+  <!-- Review pulses (green dots on the flattened curve) -->
+  <g fill="#34d399">
+    <circle cx="150" cy="112" r="6"/>
+    <circle cx="260" cy="115" r="6"/>
+    <circle cx="380" cy="128" r="6"/>
+    <circle cx="520" cy="146" r="6"/>
+    <circle cx="640" cy="156" r="6"/>
+  </g>
+  <g fill="#10b981" opacity="0.35">
+    <circle cx="150" cy="112" r="14"/>
+    <circle cx="260" cy="115" r="14"/>
+    <circle cx="380" cy="128" r="14"/>
+    <circle cx="520" cy="146" r="14"/>
+    <circle cx="640" cy="156" r="14"/>
+  </g>
+
+  <!-- Axes -->
+  <line x1="60" y1="100" x2="60" y2="430" stroke="#3f3f46" stroke-width="1.5"/>
+  <line x1="60" y1="430" x2="680" y2="430" stroke="#3f3f46" stroke-width="1.5"/>
+
+  <!-- Labels -->
+  <g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" fill="#a1a1aa">
+    <text x="32" y="100" font-size="13" text-anchor="end">100%</text>
+    <text x="32" y="270" font-size="13" text-anchor="end">50%</text>
+    <text x="32" y="430" font-size="13" text-anchor="end">0%</text>
+    <text x="60" y="455" font-size="13" text-anchor="start">Day 0</text>
+    <text x="370" y="455" font-size="13" text-anchor="middle">→ time</text>
+    <text x="680" y="455" font-size="13" text-anchor="end">Day 30</text>
+  </g>
+
+  <!-- Legend -->
+  <g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="14" fill="#fafafa">
+    <rect x="430" y="40" width="240" height="48" rx="10" fill="#0a0a0b" opacity="0.65"/>
+    <circle cx="450" cy="56" r="5" fill="#ef4444"/>
+    <text x="464" y="60">Without review</text>
+    <circle cx="450" cy="76" r="5" fill="#10b981"/>
+    <text x="464" y="80">With Recall (FSRS)</text>
+  </g>
+
+  <!-- R brand mark -->
+  <g transform="translate(40, 30)">
+    <rect width="36" height="36" rx="9" fill="#fafafa"/>
+    <text x="18" y="27" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+          font-size="24" font-weight="800" fill="#0a0a0b" text-anchor="middle">R</text>
+  </g>
+</svg>

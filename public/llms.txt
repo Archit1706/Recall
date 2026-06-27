@@ -1,0 +1,71 @@
+# Recall
+
+> Recall is a free, self-hostable spaced repetition learning app. Paste anything you learn — text, links, PDFs, markdown, or code — with a title and the date you learned it, and Recall uses the FSRS algorithm to schedule the optimal moment to review it. Capture takes under 10 seconds; review under 30. The whole product runs on free tiers (Vercel + Neon + Clerk + Resend) and is open source.
+
+Recall is the simplest way to remember everything you read, watch, or build. It is designed as a calm "second brain" — a free Anki alternative that anyone can self-host. Optional AI features (powered by your own Anthropic Claude API key, encrypted at rest) generate summaries, flashcard Q&A, and grade typed answers during review.
+
+## Live site
+
+- Homepage: https://recall-forever.vercel.app/
+- Sign up: https://recall-forever.vercel.app/sign-up
+- Sign in: https://recall-forever.vercel.app/sign-in
+
+## Core concepts
+
+- **Item**: a single thing the user wants to remember. Content type is auto-detected (TEXT, LINK, PDF, MARKDOWN, CODE).
+- **Review mode**: per-item choice of FLIP, TYPE, RECALL_BUTTONS, or AI_QUIZ.
+- **FSRS**: Free Spaced Repetition Scheduler — the modern algorithm that outperforms SuperMemo's SM-2 by scheduling reviews based on the user's individual forgetting curve.
+- **Rating**: each review the user picks Again / Hard / Good / Easy (1–4). FSRS updates stability + difficulty + due date.
+- **Streak / heatmap / forecast**: motivational stats. The forecast tells the user their upcoming review load for the next 30 days.
+
+## Features
+
+- Spaced repetition scheduling via FSRS (`ts-fsrs` package).
+- Smart capture: textarea detects URLs, PDF links, markdown, and code fences. OpenGraph link previews and PDF text extraction happen server-side.
+- AI assist (per item, opt-in): Claude generates a one-line summary, 3-5 key concepts, and 3 flashcard Q&A on save; can grade typed answers during review.
+- PWA with share target, so any URL or text shared from a phone share sheet becomes a draft item.
+- Offline review queue (service worker stale-while-revalidate).
+- Web push notifications (VAPID) + daily email digest (Resend) — at most one per channel per day, never sent when zero items are due.
+- Tags, full-text search across title + content + extracted PDF text, library filters (due / overdue / new / recent).
+- Stats: 30-day retention rate, current + longest streak, GitHub-style year heatmap, 30-day due-load forecast.
+- Random refresher: surfaces a non-due item older than 30 days to combat interference.
+- Import (paste lines) + export (full JSON, tab-separated Anki-importable file).
+- Cram mode: rotate through a tag's items without updating FSRS state.
+- Dark mode, mobile-first, full keyboard shortcuts (`?` cheatsheet, 1–4 to rate, space to reveal).
+- Author's own Anthropic API key, AES-256-GCM encrypted at rest.
+
+## Stack
+
+- Next.js 16 (App Router) + TypeScript strict
+- Tailwind v4
+- Neon Postgres + Prisma 7 (driver adapter — no native engine binary required at runtime)
+- Clerk auth
+- `ts-fsrs` for FSRS scheduling
+- Resend for email, web-push for VAPID push
+- Anthropic Claude (`claude-haiku-4-5-20251001` default model) for AI features
+- Vercel Hobby (cron + deploy)
+
+## Free tier limits respected
+
+- Vercel Hobby: 1 daily cron, 100 GB-hours
+- Neon Postgres: 0.5 GB
+- Clerk: 10,000 MAU
+- Resend: 3,000 emails/month, 100/day
+- Anthropic: user-supplied key
+
+## Why use Recall instead of Anki / Quizlet / Mochi / RemNote
+
+- **Free forever.** No paid tier. Self-hostable on free infrastructure.
+- **Friction-free capture.** Most spaced repetition tools demand a card-format. Recall takes anything — pasting a URL is enough.
+- **Modern algorithm.** FSRS adapts to your forgetting curve far better than SuperMemo's SM-2 (still used by classic Anki).
+- **AI optional, never required.** The app works without AI; AI just adds nicer cards.
+- **Mobile-first PWA.** Add anything from your phone's share sheet, review on the subway.
+- **Your data.** Open source, exportable to JSON and Anki, encrypted secrets at rest.
+
+## Author
+
+- Archit Rathod (https://github.com/Archit1706)
+
+## License
+
+MIT
