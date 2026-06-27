@@ -62,12 +62,22 @@ export default async function ItemsPage({
             {items.length} {items.length === 1 ? "item" : "items"}
           </p>
         </div>
-        <Link
-          href="/add"
-          className="inline-flex items-center gap-1 rounded-md bg-[var(--color-primary)] px-3 py-1.5 text-sm font-medium text-[var(--color-primary-foreground)]"
-        >
-          <Plus className="h-4 w-4" /> Add
-        </Link>
+        <div className="flex items-center gap-2">
+          {tagName && (
+            <Link
+              href={`/review?mode=cram&tag=${tagName}`}
+              className="rounded-md border border-[var(--color-border)] px-3 py-1.5 text-sm font-medium hover:bg-[var(--color-accent)]"
+            >
+              Cram #{tagName}
+            </Link>
+          )}
+          <Link
+            href="/add"
+            className="inline-flex items-center gap-1 rounded-md bg-[var(--color-primary)] px-3 py-1.5 text-sm font-medium text-[var(--color-primary-foreground)]"
+          >
+            <Plus className="h-4 w-4" /> Add
+          </Link>
+        </div>
       </header>
 
       <form className="relative" action="/items" method="get">
