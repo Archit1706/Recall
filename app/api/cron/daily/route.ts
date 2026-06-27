@@ -65,7 +65,7 @@ export async function GET(req: Request) {
             dueCount: due.length,
             appUrl,
             unsubscribeUrl: `${appUrl}/settings`,
-            topTitles: due.map((d) => d.title),
+            topTitles: due.map((d: { title: string }) => d.title),
           });
           if (ok) emailsSent += 1;
         }

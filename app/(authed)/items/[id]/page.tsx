@@ -62,7 +62,7 @@ export default async function ItemDetailPage({
         <h1 className="text-2xl font-semibold tracking-tight">{item.title}</h1>
         {item.tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5 text-xs text-[var(--color-muted-foreground)]">
-            {item.tags.map((t) => (
+            {item.tags.map((t: { name: string }) => (
               <Link key={t.name} href={`/items?tag=${t.name}`}>
                 #{t.name}
               </Link>
@@ -99,7 +99,7 @@ export default async function ItemDetailPage({
             Review history
           </header>
           <ul className="divide-y divide-[var(--color-border)] text-sm">
-            {item.reviews.map((r) => (
+            {item.reviews.map((r: { id: string; rating: number; reviewedAt: Date }) => (
               <li key={r.id} className="flex items-center justify-between px-4 py-2">
                 <span className="text-[var(--color-muted-foreground)]">
                   {r.reviewedAt.toLocaleString()}

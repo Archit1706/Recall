@@ -31,16 +31,21 @@ export default async function StatsPage() {
   ]);
 
   const stateCounts: Record<string, number> = { New: 0, Learning: 0, Review: 0, Relearning: 0 };
-  for (const it of items) {
+  for (const it of items as { state: number }[]) {
     const label = STATE_LABELS[it.state] ?? "New";
     stateCounts[label] = (stateCounts[label] ?? 0) + 1;
   }
 
-  const streak = computeStreak(reviews.map((r) => r.reviewedAt));
-  const forecast = dueForecast(items.map((i) => i.due));
-  const cells = heatmap(reviews.map((r) => r.reviewedAt));
-  const retention30d = retentionRate(allReviewsForRetention.map((r) => r.rating));
-  const totalLapses = items.reduce((acc, it) => acc + it.lapses, 0);
+  const streak = computeStreak(reviews.map((r: { reviewedAt: Date }) => r.reviewedAt));
+  const forecast = dueForecast(items.map((i: { due: Date }) => i.due));
+  const cells = heatmap(reviews.map((r: { reviewedAt: Date }) => r.reviewedAt));
+  const retention30d = retentionRate(
+    allReviewsForRetention.map((r: { rating: number }) => r.rating),
+  );
+  const totalLapses = items.reduce(
+    (acc: number, it: { lapses: number }) => acc + it.lapses,
+    0,
+  );
 
   return (
     <div className="space-y-8">

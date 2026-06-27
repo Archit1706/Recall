@@ -52,7 +52,21 @@ export default async function ReviewPage({
     );
   }
 
-  const payload = items.map((it) => ({
+  type ReviewRow = {
+    id: string;
+    title: string;
+    contentType: string;
+    rawContent: string;
+    sourceUrl: string | null;
+    reviewMode: "FLIP" | "TYPE" | "RECALL_BUTTONS" | "AI_QUIZ";
+    aiEnabled: boolean;
+    aiQuestions: unknown;
+    aiSummary: string | null;
+    state: number;
+    reps: number;
+    tags: { name: string }[];
+  };
+  const payload = (items as ReviewRow[]).map((it) => ({
     id: it.id,
     title: it.title,
     contentType: it.contentType,
@@ -64,7 +78,7 @@ export default async function ReviewPage({
     aiSummary: it.aiSummary,
     state: it.state,
     reps: it.reps,
-    tags: it.tags.map((t) => t.name),
+    tags: it.tags.map((t: { name: string }) => t.name),
   }));
 
   return <ReviewSession items={payload} cram={cram} />;

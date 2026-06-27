@@ -116,7 +116,7 @@ export default async function ItemsPage({
         {tags.length > 0 && (
           <span className="mx-1 text-xs text-[var(--color-muted-foreground)]">·</span>
         )}
-        {tags.map((t) => {
+        {tags.map((t: { id: string; name: string }) => {
           const active = tagName === t.name;
           const href = new URLSearchParams();
           if (q) href.set("q", q);
@@ -156,7 +156,14 @@ export default async function ItemsPage({
         </div>
       ) : (
         <ul className="divide-y divide-[var(--color-border)] rounded-2xl border border-[var(--color-border)]">
-          {items.map((it) => {
+          {items.map((it: {
+            id: string;
+            title: string;
+            due: Date;
+            contentType: string;
+            state: number;
+            tags: { name: string }[];
+          }) => {
             const overdue = it.due.getTime() < now.getTime();
             return (
               <li key={it.id}>
@@ -179,7 +186,7 @@ export default async function ItemsPage({
                       {it.contentType}
                     </span>
                     <span>{STATE_LABELS[it.state] ?? "New"}</span>
-                    {it.tags.map((t) => (
+                    {it.tags.map((t: { name: string }) => (
                       <span key={t.name}>#{t.name}</span>
                     ))}
                   </div>

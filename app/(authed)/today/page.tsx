@@ -41,7 +41,7 @@ export default async function TodayPage() {
   const dueCount = await prisma.item.count({
     where: { userId, archived: false, due: { lte: now } },
   });
-  const streak = computeStreak(recentReviews.map((r) => r.reviewedAt));
+  const streak = computeStreak(recentReviews.map((r: { reviewedAt: Date }) => r.reviewedAt));
 
   async function startRandomRefresher() {
     "use server";
@@ -147,7 +147,7 @@ export default async function TodayPage() {
           </div>
         ) : (
           <ul className="divide-y divide-[var(--color-border)]">
-            {dueItems.map((it) => (
+            {dueItems.map((it: { id: string; title: string; due: Date }) => (
               <li key={it.id}>
                 <Link
                   href={`/items/${it.id}`}

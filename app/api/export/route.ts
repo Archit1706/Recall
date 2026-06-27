@@ -3,6 +3,28 @@ import { requireUserId } from "@/lib/user";
 
 export const runtime = "nodejs";
 
+type ExportItem = {
+  title: string;
+  contentType: string;
+  rawContent: string;
+  extractedText: string | null;
+  sourceUrl: string | null;
+  learnedAt: Date;
+  reviewMode: string;
+  tags: { name: string }[];
+  notes: string | null;
+  aiSummary: string | null;
+  due: Date;
+  stability: number;
+  difficulty: number;
+  elapsedDays: number;
+  scheduledDays: number;
+  reps: number;
+  lapses: number;
+  state: number;
+  lastReview: Date | null;
+};
+
 export async function GET(req: Request) {
   const userId = await requireUserId();
   const url = new URL(req.url);
@@ -20,10 +42,10 @@ export async function GET(req: Request) {
     // Anki Desktop imports natively (File → Import → Text). One row per card.
     const tsv = ["Front\tBack\tTags"]
       .concat(
-        items.map((it) => {
+        items.map((it: { title: string; rawContent: string; tags: { name: string }[] }) => {
           const front = sanitize(it.title);
           const back = sanitize(it.rawContent.slice(0, 1500));
-          const tags = it.tags.map((t) => t.name).join(" ");
+          const tags = it.tags.map((t: { name: string }) => t.name).join(" ");
           return `${front}\t${back}\t${tags}`;
         }),
       )
@@ -39,7 +61,7 @@ export async function GET(req: Request) {
   const payload = {
     exportedAt: new Date().toISOString(),
     schemaVersion: 1,
-    items: items.map((it) => ({
+    items: (items as ExportItem[]).map((it) => ({
       title: it.title,
       contentType: it.contentType,
       rawContent: it.rawContent,
@@ -47,7 +69,7 @@ export async function GET(req: Request) {
       sourceUrl: it.sourceUrl,
       learnedAt: it.learnedAt,
       reviewMode: it.reviewMode,
-      tags: it.tags.map((t) => t.name),
+      tags: it.tags.map((t: { name: string }) => t.name),
       notes: it.notes,
       aiSummary: it.aiSummary,
       fsrs: {
