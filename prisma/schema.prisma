@@ -2,8 +2,8 @@
 // Postgres on Neon (free tier). Run `npx prisma db push` after configuring DATABASE_URL.
 
 generator client {
-  provider     = "prisma-client-js"
-  moduleFormat = "esm"
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
