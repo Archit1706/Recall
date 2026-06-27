@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630"
+     role="img" aria-labelledby="ogTitle ogDesc">
+  <title id="ogTitle">Recall — Free Spaced Repetition App with FSRS &amp; AI Flashcards</title>
+  <desc id="ogDesc">Recall is your calm second brain. Save anything you learn — links, PDFs, notes, code — and FSRS schedules the perfect review.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0b"/>
+      <stop offset="60%" stop-color="#18181b"/>
+      <stop offset="100%" stop-color="#1f1d2b"/>
+    </linearGradient>
+
+    <radialGradient id="glowEmerald" cx="80%" cy="15%" r="55%">
+      <stop offset="0%" stop-color="rgba(16,185,129,0.40)"/>
+      <stop offset="100%" stop-color="rgba(16,185,129,0)"/>
+    </radialGradient>
+
+    <radialGradient id="glowIndigo" cx="10%" cy="105%" r="55%">
+      <stop offset="0%" stop-color="rgba(99,102,241,0.32)"/>
+      <stop offset="100%" stop-color="rgba(99,102,241,0)"/>
+    </radialGradient>
+
+    <linearGradient id="curveForget" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+
+    <linearGradient id="curveRecall" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+
+    <style><![CDATA[
+      .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif; }
+      .h1 { font-size: 88px; font-weight: 700; letter-spacing: -2.5px; fill: #fafafa; }
+      .h1 em { fill: #34d399; font-style: normal; }
+      .sub { font-size: 30px; fill: #a1a1aa; }
+      .brand { font-size: 38px; font-weight: 600; letter-spacing: -0.5px; fill: #fafafa; }
+      .pill { font-size: 22px; fill: #e4e4e7; }
+      .url { font-size: 22px; fill: #71717a; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .axis { font-size: 14px; fill: #71717a; }
+    ]]></style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glowEmerald)"/>
+  <rect width="1200" height="630" fill="url(#glowIndigo)"/>
+
+  <!-- Subtle grid -->
+  <g stroke="#27272a" stroke-width="0.5" opacity="0.35">
+    <line x1="0" y1="120" x2="1200" y2="120"/>
+    <line x1="0" y1="240" x2="1200" y2="240"/>
+    <line x1="0" y1="360" x2="1200" y2="360"/>
+    <line x1="0" y1="480" x2="1200" y2="480"/>
+  </g>
+
+  <!-- Brand mark -->
+  <g transform="translate(72, 64)">
+    <rect width="64" height="64" rx="16" fill="#fafafa"/>
+    <text x="32" y="48" class="sans" font-size="40" font-weight="800"
+          fill="#0a0a0b" text-anchor="middle">R</text>
+    <text x="84" y="48" class="sans brand">Recall</text>
+  </g>
+
+  <!-- Free badge -->
+  <g transform="translate(960, 76)">
+    <rect width="168" height="36" rx="18" fill="rgba(16,185,129,0.12)" stroke="#10b981" stroke-width="1.5"/>
+    <circle cx="20" cy="18" r="4" fill="#34d399"/>
+    <text x="34" y="24" class="sans" font-size="16" fill="#a7f3d0">Free forever · Open source</text>
+  </g>
+
+  <!-- Headline -->
+  <g transform="translate(72, 240)">
+    <text class="sans h1">
+      <tspan x="0" dy="0">Remember <tspan fill="#34d399">everything</tspan></tspan>
+      <tspan x="0" dy="100">you learn.</tspan>
+    </text>
+  </g>
+
+  <!-- Subtitle -->
+  <g transform="translate(72, 460)">
+    <text class="sans sub">
+      <tspan x="0" dy="0">Free spaced repetition with FSRS. Paste a link, PDF, note,</tspan>
+      <tspan x="0" dy="40">or snippet — Recall schedules the perfect review.</tspan>
+    </text>
+  </g>
+
+  <!-- Mini forgetting-curve infographic on the right -->
+  <g transform="translate(740, 160)">
+    <rect width="380" height="240" rx="20" fill="rgba(10,10,11,0.55)" stroke="#27272a" stroke-width="1"/>
+
+    <!-- glow halos -->
+    <path d="M 30 40 C 80 65, 130 130, 220 200 S 350 215, 360 215"
+          stroke="url(#curveForget)" stroke-width="18" fill="none" opacity="0.18" filter="url(#softGlow)"/>
+    <path d="M 30 40 C 90 50, 160 50, 230 65 S 350 80, 360 82"
+          stroke="url(#curveRecall)" stroke-width="18" fill="none" opacity="0.22" filter="url(#softGlow)"/>
+
+    <!-- forgetting curve -->
+    <path d="M 30 40 C 80 65, 130 130, 220 200 S 350 215, 360 215"
+          stroke="url(#curveForget)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <!-- recall curve -->
+    <path d="M 30 40 C 90 50, 160 50, 230 65 S 350 80, 360 82"
+          stroke="url(#curveRecall)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+
+    <!-- review dots -->
+    <g fill="#34d399">
+      <circle cx="80" cy="49" r="5"/>
+      <circle cx="150" cy="51" r="5"/>
+      <circle cx="220" cy="63" r="5"/>
+      <circle cx="290" cy="76" r="5"/>
+      <circle cx="350" cy="81" r="5"/>
+    </g>
+
+    <!-- axes -->
+    <line x1="30" y1="40" x2="30" y2="220" stroke="#3f3f46" stroke-width="1"/>
+    <line x1="30" y1="220" x2="360" y2="220" stroke="#3f3f46" stroke-width="1"/>
+
+    <!-- labels -->
+    <text x="22" y="44" class="sans axis" text-anchor="end">100%</text>
+    <text x="22" y="224" class="sans axis" text-anchor="end">0%</text>
+    <text x="30" y="236" class="sans axis">Day 0</text>
+    <text x="360" y="236" class="sans axis" text-anchor="end">Day 30</text>
+
+    <!-- legend -->
+    <g transform="translate(180, 110)">
+      <circle cx="0" cy="-4" r="4" fill="#ef4444"/>
+      <text x="12" y="0" class="sans" font-size="14" fill="#fafafa">Without review</text>
+      <circle cx="0" cy="20" r="4" fill="#10b981"/>
+      <text x="12" y="24" class="sans" font-size="14" fill="#fafafa">With Recall (FSRS)</text>
+    </g>
+  </g>
+
+  <!-- Feature pills -->
+  <g transform="translate(72, 552)">
+    <g>
+      <rect width="92" height="42" rx="21" fill="rgba(255,255,255,0.04)" stroke="#3f3f46" stroke-width="1"/>
+      <text x="46" y="28" class="sans pill" text-anchor="middle">FSRS</text>
+    </g>
+    <g transform="translate(108, 0)">
+      <rect width="116" height="42" rx="21" fill="rgba(255,255,255,0.04)" stroke="#3f3f46" stroke-width="1"/>
+      <text x="58" y="28" class="sans pill" text-anchor="middle">AI quiz</text>
+    </g>
+    <g transform="translate(240, 0)">
+      <rect width="86" height="42" rx="21" fill="rgba(255,255,255,0.04)" stroke="#3f3f46" stroke-width="1"/>
+      <text x="43" y="28" class="sans pill" text-anchor="middle">PWA</text>
+    </g>
+    <g transform="translate(342, 0)">
+      <rect width="146" height="42" rx="21" fill="rgba(255,255,255,0.04)" stroke="#3f3f46" stroke-width="1"/>
+      <text x="73" y="28" class="sans pill" text-anchor="middle">Self-host</text>
+    </g>
+    <g transform="translate(504, 0)">
+      <rect width="100" height="42" rx="21" fill="rgba(255,255,255,0.04)" stroke="#3f3f46" stroke-width="1"/>
+      <text x="50" y="28" class="sans pill" text-anchor="middle">MIT</text>
+    </g>
+  </g>
+
+  <!-- URL footer -->
+  <g transform="translate(1128, 578)">
+    <text x="0" y="0" class="sans mono url" text-anchor="end">recall-forever.vercel.app</text>
+  </g>
+</svg>
