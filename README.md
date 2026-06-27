@@ -109,7 +109,7 @@ Replace the output with your own art at any time.
 5. **Set env vars** on Vercel (copy from `.env.example`).
 6. **Add a Clerk webhook**: URL `https://your-app.vercel.app/api/webhooks/clerk`, events `user.created`, `user.updated`, `user.deleted`. Copy the signing secret → `CLERK_WEBHOOK_SECRET`.
 7. **Run migrations** against Neon: `DATABASE_URL=... DIRECT_URL=... npx prisma db push`.
-8. The included `vercel.json` schedules `/api/cron/daily` hourly. Vercel will pass `Authorization: Bearer ${CRON_SECRET}` — set `CRON_SECRET` to a strong random value.
+8. The included `vercel.json` schedules `/api/cron/daily` once a day at **13:00 UTC** (Vercel Hobby allows daily crons only). Vercel will pass `Authorization: Bearer ${CRON_SECRET}` — set `CRON_SECRET` to a strong random value. If you upgrade to Pro and want per-timezone 8 AM digests, change the schedule to `0 * * * *` and re-add a local-hour check in `app/api/cron/daily/route.ts`.
 
 That's it.
 

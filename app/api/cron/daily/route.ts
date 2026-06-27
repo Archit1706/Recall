@@ -6,12 +6,14 @@ export const runtime = "nodejs";
 export const maxDuration = 60;
 
 /**
- * Hourly cron. For each user, checks: (a) is the user's local time near 08:00?
- * (b) is there at least one item due? (c) have we already notified today?
+ * Daily cron (Vercel Hobby allows daily only). Fires once at 13:00 UTC.
+ * For each user we check: (a) is there at least one item due? (b) have we
+ * already notified today (per their local-day boundary)?
  * Sends an email digest and a web push.
  *
  * Idempotency: we write a NotifyLog row keyed by (userId, channel, dayKey).
- * Two concurrent invocations are safe — the unique constraint blocks duplicates.
+ * The dayKey uses the user's local calendar day so timezone changes still dedup
+ * correctly.
  */
 export async function GET(req: Request) {
   const auth = req.headers.get("authorization");
@@ -32,12 +34,7 @@ export async function GET(req: Request) {
 
   for (const u of users) {
     try {
-      const local = localHourAndDay(now, u.timezone);
-      // Only send within the 8 AM hour. Cron may run more frequently.
-      if (local.hour !== 8) {
-        skipped += 1;
-        continue;
-      }
+      const local = localDayKey(now, u.timezone);
       const due = await prisma.item.findMany({
         where: { userId: u.id, archived: false, due: { lte: now } },
         orderBy: { due: "asc" },
@@ -104,21 +101,17 @@ export async function GET(req: Request) {
   return Response.json({ ok: true, emailsSent, pushSent, skipped, users: users.length });
 }
 
-function localHourAndDay(now: Date, tz: string): { hour: number; dayKey: string } {
+function localDayKey(now: Date, tz: string): { dayKey: string } {
   try {
     const parts = new Intl.DateTimeFormat("en-CA", {
       timeZone: tz,
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
-      hour: "2-digit",
-      hour12: false,
     }).formatToParts(now);
     const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";
-    const dayKey = `${get("year")}-${get("month")}-${get("day")}`;
-    const hour = Number(get("hour"));
-    return { hour, dayKey };
+    return { dayKey: `${get("year")}-${get("month")}-${get("day")}` };
   } catch {
-    return { hour: now.getUTCHours(), dayKey: now.toISOString().slice(0, 10) };
+    return { dayKey: now.toISOString().slice(0, 10) };
   }
 }
