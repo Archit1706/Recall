@@ -87,7 +87,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     images: [
       {
-        url: "/opengraph-image",
+        url: "/og.png",
         width: 1200,
         height: 630,
         type: "image/png",
@@ -108,7 +108,7 @@ export const metadata: Metadata = {
     description:
       "Save anything you learn. Recall schedules optimal reviews with FSRS so it sticks. Free, self-hostable, AI-assisted.",
     creator: "@archit1706",
-    images: ["/opengraph-image"],
+    images: ["/og.png"],
   },
   robots: {
     index: true,
